@@ -74,6 +74,8 @@ class MainController extends Controller
 
         $genre = Genre :: find($data['genre_id']);
         $movie -> update($data);
+        $movie -> genre() -> associate($genre);
+        $movie -> save();
 
         $tags = Tag :: find($data['tags_id']);
         $movie -> tags() -> sync($tags);
