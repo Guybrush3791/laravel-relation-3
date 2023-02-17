@@ -71,8 +71,6 @@ export default {
           const data = res.data;
           const success = data.success;
 
-          console.log('data', data);
-
           if (success) {
 
             this.clearForms();
@@ -97,8 +95,6 @@ export default {
 
             const data = res.data;
             const success = data.success;
-
-            console.log('data', data);
 
             if (success) {
 
