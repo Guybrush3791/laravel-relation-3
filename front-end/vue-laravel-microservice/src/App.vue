@@ -112,7 +112,7 @@ export default {
                 this.tags = tags;
               }
            })
-           .catch(err => console.log);
+           .catch(err => console.error('error', err));
     }
   },
   mounted() {
