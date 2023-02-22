@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <script >
 
 import axios from 'axios';
@@ -113,7 +112,7 @@ export default {
                 this.tags = tags;
               }
            })
-           .catch(err => console.error('error', err));
+           .catch(err => console.log);
     }
   },
   mounted() {
@@ -122,89 +121,55 @@ export default {
   }
 };
 
-=======
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
->>>>>>> dev
 </script>
 
 <template>
-  <header>
-    HEADER
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div>
+    <h1>Movies</h1>
+    <form v-if="state.movieForm">
+      <label for="name">Name</label>
+      <input type="text" name="name" v-model="new_movie.name">
+      <br>
+      <label for="year">Year</label>
+      <input type="number" name="year" v-model="new_movie.year">
+      <br>
+      <label for="cashOut">Cash out</label>
+      <input type="number" name="cashOut" v-model="new_movie.cashOut">
+      <br>
+      <label for="genre">Genre</label>
+      <select name="genre_id" v-model="new_movie.genre_id">
+        <option v-for="genre in genres" :key="genre.id" :value="genre.id">{{ genre.name }}</option>
+      </select>
+      <br>
+      <label>Tags:</label>
+      <br>
+      <div v-for="tag in tags" :key="tag.id">
+        <input type="checkbox" :id="'tag-' + tag.id" :value="tag.id" v-model="new_movie.tags_id">
+        <label :for="'tag-' + tag.id">{{ tag.name }}</label>
+      </div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">CREATE NEW MOVIE</RouterLink>
-        <a href="http://localhost:8000/movie/create">CREATE NEW MOVIE</a>
-      </nav>
+      <button @click="closeForm">CANCEL</button>
+      <input type="submit" @click="submitMovie" :value="'id' in new_movie ? 'UPDATE MOVIE: ' + new_movie.id : 'CREATE NEW MOVIE'">
+    </form>
+    <div v-else>
+      <button @click="state.movieForm = true">CREATE NEW MOVIE</button>
+      <ul>
+        <li v-for="movie in movies" :key="movie.id">
+          {{ movie.name }}
+          <br>
+          <button @click="editMovie(movie)">EDIT</button>
+          <button @click="deleteMovie(movie)">DELETE</button>
+          <ul>
+            <li v-for="tag in movie.tags" :key="tag.id">
+              {{ tag.name }}
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
