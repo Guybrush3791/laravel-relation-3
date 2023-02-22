@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api/';
+const API_URL = 'http://64.226.72.137:8000/api/';
 const API_VER = 'v1/';
 const API = API_URL + API_VER;
 
