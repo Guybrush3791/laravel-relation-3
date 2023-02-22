@@ -10,7 +10,7 @@ use App\Models\Tag;
 
 class MainController extends Controller
 {
-    
+    // test
     public function home() {
 
         $genres = Genre :: all();
